@@ -86,8 +86,6 @@ while True:
 
                     msg+= f" !!!!! YOU WIN: {WIN} € !!!!!"
 
-                    time.sleep(0.5)
-
             slowprint(f"\n\n{msg}", 0.5)
         else:
             print("\nNot Enough MONEY to BET")
