@@ -6,7 +6,7 @@ sys.set_int_max_str_digits(0)
 
 sys = ['🍇', '🍉', '🍒', '🍌', '🥥', '🫐', '🍐', '🥭', '🎱', '💎']
 
-winnings = [500, 250, 100, 50, 20]
+winnings = [350, 150, 100, 50, 20]
 
 winning_combs = {
     '💎💎💎💎' : winnings[0],
@@ -39,21 +39,26 @@ def betterNumbers(number):
         
     return n[::-1]
 
+
+
+
 INITIAL = 50_000
-SPIN = 10**4
+SPIN = 200_000
 
 amount = INITIAL
 
-rtp = 0
-
-totalWinning = 0
-totalLose = 0
-
 bk = False
 
-CYCLES = 1000
+CYCLES = 50
+
+rtps=[]
 
 for _ in range(CYCLES):
+    rtp = 0
+
+    totalWinning = 0
+    totalBets = 0
+
     if(bk):
         break
 
@@ -72,8 +77,8 @@ for _ in range(CYCLES):
        
 
         amount+= bet
-        totalLose+= bet
-
+        totalBets+=bet
+        
         g = play()
 
         for comb in winning_combs.keys():
@@ -82,13 +87,25 @@ for _ in range(CYCLES):
                 WIN = winning_combs[comb] * bet
 
                 amount-= WIN
-                totalWinning += WIN 
+                totalWinning += WIN
 
-print(f"\nProfit => {betterNumbers(round(totalLose - totalWinning))} € -> (substract INITIAL: {betterNumbers(INITIAL)})")
+                break
+
+
+    rtp = round(totalWinning / totalBets, 4) * 100
+
+    if(rtp > 97):
+        print("RTP TOO HIGH !")
+        int("b")
+
+    rtps.append(rtp)
+        
+
+print(f"\nProfit => {betterNumbers(round(totalBets - totalWinning))} € -> (substract INITIAL: {betterNumbers(INITIAL)})")
 
 print(f"\nWins => {betterNumbers(round(totalWinning))} €")
-print(f"\nLoses => {betterNumbers(round(totalLose))} €")
+print(f"\nLoses => {betterNumbers(round(totalBets))} €")
 
 print(f"\n\nBankRupt: {bk}")
 
-print(f"\n\nRTP (Return To Player) => {round(totalWinning / totalLose, 4) * 100} %")
+print(f"\n\nAvarage RTP (Return To Player) => {sum(rtps) / len(rtps)} %\n\nMIN RTP: {min(rtps)} %\nMAX RTP: {max(rtps)} %")

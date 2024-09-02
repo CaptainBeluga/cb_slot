@@ -5,7 +5,7 @@ import time
 
 symbols = ['🍇', '🍉', '🍒', '🍌', '🥥', '🫐', '🍐', '🥭', '🎱', '💎']
 
-winnings = [500, 250, 100, 50, 20]
+winnings = [350, 150, 100, 50, 20]
 
 winning_combs = {
     '💎💎💎💎' : winnings[0],
@@ -85,6 +85,8 @@ while True:
                     totalWinning+= WIN
 
                     msg+= f" !!!!! YOU WIN: {WIN} € !!!!!"
+
+                    break
 
             slowprint(f"\n\n{msg}", 0.5)
         else:
