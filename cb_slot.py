@@ -23,7 +23,7 @@ def play():
     gen = ""
 
     for _ in range(4):
-        gen+= symbols[int(secrets.choice(string.digits))]
+        gen+= secrets.choice(symbols)
 
     return gen
 
